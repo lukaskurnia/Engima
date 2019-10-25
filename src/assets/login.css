@@ -1,0 +1,91 @@
+.login-wrapper {
+    background-color: white;
+    height: 100%;
+    padding: 15vh 35vw;
+}
+
+.login-card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px; /* 5px rounded corners */
+    background-color: white;
+    background-size: cover;
+    height: 70vh;
+    width: 30vw;
+}
+
+.card-header {
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    padding: 6vh 0;
+    font-size: 2rem;
+    /* margin-bottom: 4vh 0; */
+}
+
+.card-body {
+    font-family: 'Comic Sans MS';
+    padding: 0vh 2vw;
+    font-size: 1rem;
+}
+
+.input-login {
+    position: relative;
+    height: auto;
+    width: 90%;
+    box-sizing: border-box;
+    padding: 10px 10px;
+    font-size: 14px;
+    text-align: left;
+    border: none;
+    border:solid 1px gray;
+    border-radius: 5px;
+}
+
+.text-left{
+    text-align: left;
+    padding: 0vh 1vw;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.login-card a {
+    color: rgb(0, 183, 255);;
+    text-decoration: unset;
+}
+
+.login-button {
+    margin: 2vh auto;
+    cursor: pointer;
+    display: block;
+    background-color: rgb(0, 183, 255);
+    border: 2px solid rgb(0, 183, 255);
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    width: 90%;
+}
+
+.login-button:hover {
+    background-color: lightblue;
+    border: 2px solid transparent;
+    color: white;
+}
+
+.error-login {
+    position: relative;
+    height: auto;
+    width: 90%;
+    box-sizing: border-box;
+    padding: 10px 10px;
+    font-size: 14px;
+    text-align: left;
+    border: none;
+    border:solid 1px red;
+    border-radius: 5px;
+}
+
