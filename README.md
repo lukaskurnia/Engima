@@ -77,7 +77,7 @@ Berikut adalah pembagian tugas sementara dari kelompok kami:
 2. Menambah transaksi baru  : 13517084
 3. Mengubah status transaksi   : 13517084
 4. Mengembalikan seluruh data transaksi  : 13517006
-5. TheMovieDB RESTful API   : 13516042
+5. TheMovieDB   : 13516125
 
 
 ### SOAP
