@@ -1,10 +1,8 @@
-# Tugas 1 IF3110 Pengembangan Aplikasi Berbasis Web
+# Tugas 2 IF3110 Pengembangan Aplikasi Berbasis Web
 
 ## 1. Deskripsi Aplikasi Web
 
-Saat ini Engi ingin melakukan ekspansi usaha dengan membangun sebuah bioskop. Setelah berdiri selama 2 bulan, Engi merasa bioskopnya sepi dibanding bioskop kompetitor lainnya. Usut punya usut, ternyata faktor utama penyebab sepinya bioskop Engi adalah tidak adanya kemudahan pemesanan tiket secara daring. Oleh karena itu, Engi meminta Anda untuk membuat aplikasi web pemesanan tiket bioskop daring. Engi menginginkan website miliknya untuk memiliki fitur pembelian tiket, memberi ulasan pada film yang telah ditonton, login dan register, riwayat pembelian tiket.
-
-Engi telah mempekerjakan seorang UI/UX profesional untuk mendesain tampilan *website*-nya. Anda diminta untuk mengimplementasikan tampilan sedemikian mirip dengan tampilan pada contoh. Engi tidak meminta Anda untuk membangun *website* yang *responsive*. Icon dan jenis font tidak harus sama dengan contoh. Tata letak elemen, warna font, garis pemisah, dan perbedaan ukuran font harus terlihat sesuai contoh. Format rating dan waktu harus terlihat sesuai contoh tampilan.
+Setelah aplikasi web Engima diluncurkan, bioskop Engi menjadi sangat laku. Sebelumnya, Engi mengurus semua transaksi tiket film dan penambahan data film secara manual. Karena kewalahan, akhirnya Engi pergi ke seorang konsultan IT untuk menemukan solusi dari permasalahannya. Konsultan menyarankan Engi untuk menggunakan web service untuk mempermudah pekerjaannya. Melihat aplikasi web yang Anda kerjakan memuaskan, Engi meminta Anda untuk mengimplementasikan perubahan tersebut beserta web service dan aplikasi Bank yang digunakan untuk transaksi tiket film di Engima.
 
 ## 2. Requirements and Installation
 In order to run this web on your local server, you need to run it on **PHP 7.1** and install:
@@ -70,35 +68,44 @@ Install XAMPP application at https://www.apachefriends.org/download.html
 
 
 ## 5. Pembagian Tugas
-Setiap anggota kelompok **diwajibkan** untuk mengerjakan bagian frontend dan backend.
+Setiap anggota kelompok diwajibkan untuk mengerjakan bagian REST, SOAP, dan ReactJS. Jika Anda akan mengerjakan bonus, dicantumkan juga pembagian kerjanya.
 
-### Frontend
-1. Login : 13516125
-2. Register : 13516125
-3. NavBar : 13517039
-3. Home Page : 13517039
-4. Search Page : 13517039
-5. Film Detail Page : 13517039
-6. Buy Ticket Page : 13517039
-7. Transaction History : 13517150
-8. User Review : 13517150, 13517039
+Berikut adalah pembagian tugas sementara dari kelompok kami: 
 
-### Backend
-1. Login : 13516125
-2. Register : 13516125
-3. NavBar : 13516125
-3. Home Page : 13516125, 13517039
-4. Search Page : 13517039
-5. Film Detail Page : 13517039
-6. Buy Ticket Page : 13517039
-7. Transaction History : 13517150
-8. User Review : 13517150
-9. Cookies Handler : 13516125
-10. Database : 13516125, 13517039 , 13517150
-11. APIs : 13517039
+### REST
+1. Inisiator : 13516042
+2. Menambah transaksi baru  : 13517084
+3. Mengubah status transaksi   : 13517084
+4. Mengembalikan seluruh data transaksi  : 13517006
+5. TheMovieDB RESTful API   : 13516042
+
+
+### SOAP
+1. Inisiator  : 13517006
+2. Validasi  : 13516125
+3. Memberikan data rekening : 13517084
+4. Melakukan transaksi Transfer  : 13517006
+5. Membuat akun virtual : 13517006
+6. Cek Transaksi : 13516042
+
+
+### REACTJS
+1. Inisiator  : 13516125
+2. Halaman Login : 13516125
+3. Halaman Utama   : 13517084
+4. Riwayat     : 13516042
+5. Transfer    : 13517006
+
+### Perubahan ENGIMA
+1. Konektor ke WS Transaksi : 13516042
+2. Konektor ke WS Bank  : 13517006
+3. Perubahan Home   : 13517084
+4. Perubahan Film Details   : 13516125
+5. Perubahan Buy Ticket : 13516125
+6. Perubahan Transaction History  : 13516125
 
 ## About
 
-Kelompok 3 IF3110 - 2019
+Kelompok 14 IF3110 - 2019
 
-Aldo | Ridwan | Steve 
+Lukas | Vijjasena | Aldo | Seldi
