@@ -87,6 +87,10 @@ function UpdateContent(desiredPage) {
                               <img class="small-icon" src="../icons/star.png" alt="star">
                               <span class="rating__text">${rating}</span>
                           </div>
+                          <div class="rating">
+                              <img class="small-icon" src="../icons/mdbicon.png" alt="mdbicon">
+                              <span class="rating__text"> MovieDB Rating: ${rating}</span>
+                          </div>
                           <p class="sp-description">${movieList[i].description}</p>
                       </div>
                   </div>

@@ -89,6 +89,12 @@
                             {$rating}
                         </span>
                     </div>
+                    <div class='rating'>
+                        <img class='big-icon' src='../icons/mdbicon.png' alt='mdbicon'>
+                        <span class='dp-rating'>
+                            MovieDB Rating: {$rating}
+                        </span>
+                    </div>
                     <p class='dp-movie__subtext 
                     dp-movie__subtext--light'>
                         {$movie_data['description']}
