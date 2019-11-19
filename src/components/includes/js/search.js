@@ -6,7 +6,7 @@
 
 const firstPage = 1;
 let totalPage = null;
-const contentLimit = 20;
+// const contentLimit = 20;
 const mainContent = document.getElementById('mainContent');
 const moviePage = [];
 let totalResult = null;

@@ -27,7 +27,8 @@ require_once "includes/redirect.php";
     <body>
         <div class="row register-wrapper">
             <div class="register-card">
-                <form action="../API/Register.php" method="POST" id="register-form" enctype="multipart/form-data" autocomplete="off">
+                <form action="../API/Register.php" method="POST" id="register-form" 
+                enctype="multipart/form-data" autocomplete="off">
                     <div class="card-header">Welcome to <b>Engi</b>ma!</div>
                     <div class="card-body">
                         <div class="text-left">

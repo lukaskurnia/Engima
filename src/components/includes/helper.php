@@ -1,4 +1,6 @@
-<?php
+<?php 
+// namespace engima;
+
 /**
  * Helper function for cookies checking
  * Php version 7.2.19
@@ -14,6 +16,7 @@
 require_once '../db/database.php';
 
 // Method to generate random access token based on user id
+
 function genAccessToken($id, $username)
 {
     // Random factor is time (now)

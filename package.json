@@ -1,0 +1,19 @@
+{
+  "name": "engima",
+  "version": "1.0.0",
+  "description": "## 1. Deskripsi Aplikasi Web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/ --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.informatika.org/if3110-2019-02-k03-14/engima.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.6.0"
+  }
+}

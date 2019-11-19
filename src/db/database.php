@@ -1,4 +1,6 @@
-<?php
+<?php 
+// namespace engima;
+
 /**
  * Implement of database connection
  * Php version 7.2.19
