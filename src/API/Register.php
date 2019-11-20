@@ -11,10 +11,13 @@
  * @link     https://gitlab.informatika.org/if3110-2019-01-k03-03/tugas-besar-1-2019
  */
 
+use engima\Database;
+
+require_once '../db/database.php';
 require_once '../components/includes/helper.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $db = new Database("127.0.0.1", "root", "", "enigma");
+    $db = new engima\Database("127.0.0.1", "root", "", "enigma");
 
     $username = $_POST['username'];
     $phone_number = $_POST['phone_number'];
@@ -60,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header("Location: ../components/register.php");
     }
 } elseif ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $db = new Database("127.0.0.1", "root", "", "enigma");
+    $db = new engima\Database("127.0.0.1", "root", "", "enigma");
     $username = $_GET['username'];
 
     $sql_query = "SELECT * FROM user_profile WHERE username = ?";

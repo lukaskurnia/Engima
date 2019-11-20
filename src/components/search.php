@@ -27,7 +27,6 @@
         require_once "includes/redirect.php";
         require_once "navbar.php";
     ?>
-
     <section id="mainContent" class="wrapper">
         <h3><b>Loading movies...</b></h3>
     </section>
