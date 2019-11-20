@@ -40,7 +40,7 @@
 
         
         $api_key = '2dc9c50e0d06264a13a9e6953b693bba';
-        $urlGetData = "https://api.themoviedb.org/3/discover/movie?api_key=" . $api_key . 
+        $urlGetData = "https://api.themoviedb.org/3/discover/movie?api_key=" . $api_key .
         "&primary_release_date.gte=" . $time_seven_days_ago . "&primary_release_date.lte=" . $time;
         $get_data = callAPI('GET', $urlGetData, false);
         $movies = json_decode($get_data, true);
