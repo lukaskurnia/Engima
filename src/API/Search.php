@@ -10,12 +10,14 @@
  * @link     https://gitlab.informatika.org/if3110-2019-01-k03-03/tugas-besar-1-2019
  */
 
+ use engima\Database;
+ 
 require_once '../db/database.php';
 
 if (isset($_GET["query"])) {
     $query = "%{$_GET["query"]}%";
 
-    $db = new Database("127.0.0.1", "root", "", "enigma");
+    $db = new engima\Database("127.0.0.1", "root", "", "enigma");
     $sql_query = "SELECT * FROM movies 
                 LEFT JOIN 
                     (SELECT  movID, AVG(rating) AS rating_avg 

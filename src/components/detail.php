@@ -24,6 +24,8 @@
 
 <body>
     <?php
+        use engima\Database;
+        
         require_once "includes/redirect.php";
         require_once "navbar.php";
     ?>
@@ -35,7 +37,7 @@
         require_once "../db/database.php";
 
         $movie_id = (int)$_GET["movie_id"];
-        $db = new Database("127.0.0.1", "root", "", "enigma");
+        $db = new engima\Database("127.0.0.1", "root", "", "enigma");
         $sql_query = "SELECT * FROM movies WHERE movies.id=?";
         $movie_data=$db->execute($sql_query, array("i"), array($movie_id))[0];
         $release_date = strtotime($movie_data['released_date']);

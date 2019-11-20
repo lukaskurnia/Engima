@@ -24,9 +24,11 @@
 
 <body>
     <?php
+        use engima\Database;
+        
         require_once "includes/redirect.php";
-        require_once "includes/helper.php";
         require_once "../db/database.php";
+        require_once "includes/helper.php";
         require_once "navbar.php"
     ?>
 
@@ -35,7 +37,7 @@
             <h1 class="tp-title">Transactions History</h1>
         <?php
 
-        $db = new Database("127.0.0.1", "root", "", "enigma");
+        $db = new engima\Database("127.0.0.1", "root", "", "enigma");
         $user_id = lookUpId();
         
         $sql_query = "SELECT ord.id AS order_id,

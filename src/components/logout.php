@@ -10,9 +10,11 @@
  * @link     https://gitlab.informatika.org/if3110-2019-01-k03-03/tugas-besar-1-2019
  */
 
+use engima\Database;
+
 include_once "../db/database.php";
 
-$db = new Database("127.0.0.1", "root", "", "enigma");
+$db = new engima\Database("127.0.0.1", "root", "", "enigma");
 
 $access_token = $_COOKIE["accessToken"];
 $sql_query = "DELETE FROM server_session WHERE access_token = ?";
