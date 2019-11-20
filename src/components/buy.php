@@ -94,18 +94,21 @@
         </div>
     </div>
 
-    <div id="confirmationModal" class="modal">
-        <div class="modal__wrapper">
-            <h2 class="blue-text">
-                Transaction no. xx
+    <?php
+    $no_transaksi = 1;
+    $virtual_acc = 1234567890;
+    echo "<div id='confirmationModal' class='modal'>
+        <div class='modal__wrapper'>
+            <h2 class='blue-text'>
+                Transaction no. {$no_transaksi}
             </h2>
-            <div class="modal__message">
-                Please Transfer to this Virtual Account : xxxxxxxxx
+            <div class='modal__message'>
+                Please Transfer to this Virtual Account : {$virtual_acc}
             </div>
-            <a href="transaction.php" class="modal__button blue-background">Go to transaction history</a>
+            <a href='transaction.php' class='modal__button blue-background'>Go to transaction history</a>
         </div>
-    </div>
-
+    </div>"
+    ?>
 
     <script type="text/javascript" src="includes/js/buy.js"></script>
 </body>
