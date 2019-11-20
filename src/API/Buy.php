@@ -12,6 +12,7 @@
 
 use engima\Database;
 
+require_once '../components/includes/helper.php';
 require_once '../db/database.php';
 
 
@@ -38,8 +39,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     $movie_id = (int)$schedule_data['movie_id'];
 
-    $sql_query = "SELECT movie_name,price FROM movies WHERE movies.id=?";
-    $movie_data = $db->execute($sql_query, array("i"), array($movie_id))[0];
+    
+    $api_key = '2dc9c50e0d06264a13a9e6953b693bba';
+    $urlGetData = "https://api.themoviedb.org/3/movie/" . $movie_id .
+    "?api_key=" . $api_key;
+    $get_data = callAPI('GET', $urlGetData, false);
+    $movie_data = json_decode($get_data, true);
+    // echo $movie_data['title'];
+
+    // $sql_query = "SELECT movie_name,price FROM movies WHERE movies.id=?";
+    // $movie_data = $db->execute($sql_query, array("i"), array($movie_id))[0];
     
     $datetime = strtotime($schedule_data['datetime']);
     $datetime = date('F j, Y - h:i A', $datetime);
@@ -48,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $order_data = $db->execute($sql_query, array("i"), array($schedule_id));
     
     $result = array();
-    $result["movie"] = $movie_data;
+    $result["movie"] = $movie_data['title'];
     $result["datetime"] = $datetime;
     $result["seats"] = $order_data;
     
