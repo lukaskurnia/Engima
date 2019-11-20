@@ -148,7 +148,8 @@ function callUpdateContent(desiredPage){
   request.onreadystatechange = function Process() {
     if (this.readyState === 4 && this.status === 200) {      
       
-      
+      // mainContent.innerHTML = this.responseText;
+
       const data = JSON.parse(this.responseText);
       totalResult = data.total_results;
       

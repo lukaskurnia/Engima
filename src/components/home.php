@@ -24,11 +24,9 @@
 
 <body>
     <?php
-        use engima\Database;
-        
         require_once "includes/redirect.php";
-        require_once "../db/database.php";
         require_once "includes/helper.php";
+        require_once "../db/database.php";
         require_once "navbar.php";
     ?>
 
@@ -36,23 +34,16 @@
         <?php
         $user_id = lookUpId();
         $username = getUsername($user_id);
-        $db = new engima\Database("127.0.0.1", "root", "", "enigma");
-        $sql_query = "SELECT * FROM movies 
-                    LEFT JOIN 
-                        (SELECT  movID, AVG(rating) AS rating_avg 
-                            FROM rating JOIN 
-                            (SELECT orders.id AS ordID,
-                            movie_id AS movID,
-                            user_id AS userID FROM
-                        orders JOIN schedule
-                        ON (schedule.id=orders.schedule_id))
-                        AS ord ON (rating.orders_id=ord.ordID) GROUP BY movID) 
-                    AS rating_table ON (movies.id=rating_table.movID) 
-                    WHERE movies.id in (SELECT movie_id FROM schedule 
-                        WHERE schedule.datetime>=CURDATE()
-                            AND schedule.datetime<CURDATE()+1)";
 
-        $movies=$db->execute($sql_query, array(), array());
+        $time = time()*1000;
+        $time_seven_days_ago = $time - (86400000*7);
+
+        
+        $api_key = '2dc9c50e0d06264a13a9e6953b693bba';
+        $urlGetData = "https://api.themoviedb.org/3/discover/movie?api_key=" . $api_key . 
+        "&primary_release_date.gte=" . $time_seven_days_ago . "&primary_release_date.lte=" . $time;
+        $get_data = callAPI('GET', $urlGetData, false);
+        $movies = json_decode($get_data, true);
 
         echo "<h1><b>Hello, <span class='blue-text'>{$username}</span>!</b></h1>";
 
@@ -61,19 +52,25 @@
         } else {
             echo "<h3>Now playing</h3>
                     <div class='hp-content__flex'>";
-            foreach ($movies as $movie) {
+            foreach ($movies['results'] as $movie) {
                 echo "<a href='detail.php?movie_id={$movie['id']}' class='hp-content__element'>
-                        <img class='poster--big' src='{$movie['movie_pictures']}' alt='Movie poster'>
+                        <img class='poster--big' src=";
+                if ($movie['poster_path'] == null) {
+                            echo "../icons/pic.png";
+                } else {
+                            echo "https://image.tmdb.org/t/p/w500{$movie['poster_path']}";
+                }
+                        
+                        echo " alt='Movie poster'>
                         <div class='content__desc'>
-                            <p class='hp-title'>{$movie['movie_name']}</p>
+                            <p class='hp-title'>{$movie['title']}</p>
                             <div class='rating'>
                                 <img class='small-icon' src='../icons/star.png' alt='star'>";
                                 
-                if ($movie['rating_avg']==null) {
+                if ($movie['vote_average']==null) {
                     echo "<span class='rating__text'>No rating yet</span>";
                 } else {
-                    $rating = number_format($movie['rating_avg'] + 0, 2, ".", "");
-                    $rating = rtrim(rtrim($rating, "0"), ".");
+                    $rating = $movie['vote_average'];
                     echo "<span class='rating__text'>{$rating}</span>";
                 }
                 
