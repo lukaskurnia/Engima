@@ -40,29 +40,47 @@
         $db = new engima\Database("127.0.0.1", "root", "", "enigma");
         $user_id = lookUpId();
         
-        $sql_query = "SELECT ord.id AS order_id,
-                    movie_name,movie_pictures,
-                    datetime,review 
-                    FROM (((
+        $sql_query = "SELECT ord.id AS order_id,datetime,review,movie_id 
+                    FROM ((
                         orders as ord LEFT JOIN rating ON (ord.id=rating.orders_id))
                         JOIN schedule ON (schedule.id=ord.schedule_id))
-                        JOIN movies ON movies.id = schedule.movie_id)
                     WHERE ord.user_id=? ORDER BY datetime DESC";
         $transactions = $db->execute($sql_query, array("i"), array($user_id));
+
 
         if (empty($transactions)) {
             echo "<h3 class='grey-text'>You haven't made any purchase yet.</h3>";
         } else {
             foreach ($transactions as $transaction) {
+                $api_key = '2dc9c50e0d06264a13a9e6953b693bba';
+                $urlGetData = "https://api.themoviedb.org/3/movie/" . $transaction['movie_id'] .
+                "?api_key=" . $api_key;
+                $get_data = callAPI('GET', $urlGetData, false);
+                $movie_data = json_decode($get_data, true);
+
                 $datetime = strtotime($transaction['datetime']);
                 $formatted = date('F j, Y - h:i A', $datetime);
+
+                $no_transaksi = 1;
+                $status = "Pending";
+
                 echo "<div class='tp-content__row'>
                     <div class='tp-content__left'>
                         <div class='tp-content__image'>
-                            <img class='poster' src='{$transaction['movie_pictures']}' alt='Movie poster'>
+                            <img class='poster' src='https://image.tmdb.org/t/p/w500{$movie_data['poster_path']}'
+                             alt='Movie poster'>
                         </div>
                         <div class='tp-content__desc'>
-                            <h2>{$transaction['movie_name']}</h2>
+                            <h1 class='tp-schedule'>Transaction <span class='blue-text'>#{$no_transaksi}</span>";
+                if ($status == "Pending") {
+                                 echo "<span class='tp-status yellow-background'> Pending";
+                } elseif ($status == "Success") {
+                                echo "<span class='tp-status green-background'> Success";
+                } elseif ($status == "Cancelled") {
+                                echo "<span class='tp-status red-background'> Cancelled";
+                }                                                          
+                            echo "</h1>
+                            <h2>{$movie_data['title']}</h2>
                             <h3><span class='tp-schedule blue-text'>Schedule:</span>{$formatted}</h3>
                         </div>
                     </div>";

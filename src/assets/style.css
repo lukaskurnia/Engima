@@ -92,6 +92,10 @@ a{
     background-color:#13acd0;   
 }
 
+.yellow-background{
+    background-color:#ff8000;   
+}
+
 .green-background{
     background-color:#4bc118;
 }
@@ -638,6 +642,15 @@ a{
     font-size:1em;
     padding:10px 20px;
     margin:0px 5px;
+    cursor:pointer;
+}
+
+.tp-status{
+    border-radius:5px;
+    color:white;
+    font-size:0.7em;
+    padding:5px 10px;
+    margin-left: 15px;
     cursor:pointer;
 }
 
