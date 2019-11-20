@@ -107,69 +107,39 @@ function UpdateContent(desiredPage) {
   }
 }
 
-// function makeCompleteResult(query){
-
-
-//   mainContent.innerHTML = totalResult;
-  
-//   }
-//   return data;
-// }
-
-// if (query !== null) {
-//   mainContent.innerHTML = "haha";
+// function callUpdateContent(desiredPage){
 //   const request = new XMLHttpRequest();
 //   const method = 'GET';
 //   const api_key = '2dc9c50e0d06264a13a9e6953b693bba';
-//   let page = 1;
-//   let urlGetData = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${query}&page=${page}`;
+//   let page = desiredPage;
+//   const urlGetData = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${query}&page=${page}`;
 //   const async = true;
-//   let totalResult = 0;
-//   let totalPage = 0;
-  
 
-  // request.open(method, urlGetData, async);
-  // request.send();
-  // mainContent.innerHTML = "haha2";
-  // request.onreadystatechange = function Process() {
-  //   if (this.readyState === 4 && this.status === 200) {      
-  //     mainContent.innerHTML = "haha3";
-  //     data = JSON.parse(this.responseText);
-  //     totalResult = data.total_results;      
-  //     totalPage = data.total_pages;
+//   request.open(method, urlGetData, async);
+//   request.send();
+
+//   request.onreadystatechange = function Process() {
+//     if (this.readyState === 4 && this.status === 200) {      
+//       mainContent.innerHTML = this.responseText;
+//       const data = JSON.parse(this.responseText);
+//       totalResult = data.total_results;
+//       // mainContent.innerHTML = data.results.length;
       
-  //     page += 1;
-  //     for(page ; page <= totalPage ; page+=1){
-  //       mainContent.innerHTML = "haha4";
-  //       urlGetData = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${query}&page=${page}`;
-  //       request.open(method, urlGetData, async);
-  //       request.send();
+//       totalPage = data.total_pages;
+//       // for (let i = 0; i < totalPage; i += 1) {
+//       moviePage[page] = data;
+//       // }
       
-  //       request.onreadystatechange = function Process() {
-  //         // mainContent.innerHTML = "haha5";
-  //         if (this.readyState === 4 && this.status === 200) {      
-  //           let data_temp = JSON.parse(this.responseText);
-  //           data.results = data.results.concat(data_temp.results);
-  //           mainContent.innerHTML = data.results[20].popularity;        
-  //         }
-  //       };        
-  //     }
-//       mainContent.innerHTML = data.results[21].popularity;
-//       for (let i = 0; i < totalPage; i += 1) {
-//         moviePage[i] = data.slice(i * contentLimit, (i + 1) * contentLimit);
-//       }
-      
-//       UpdateContent(firstPage);
-//     } 
+//       UpdateContent(page);
+//     }
 //   };
+// }
 
-  // mainContent.innerHTML = data.total_results;
 function callUpdateContent(desiredPage){
   const request = new XMLHttpRequest();
   const method = 'GET';
-  const api_key = '2dc9c50e0d06264a13a9e6953b693bba';
   let page = desiredPage;
-  const urlGetData = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${query}&page=${page}`;
+  const urlGetData = `../API/MovieDB.php?query=${query}&page=${page}`;
   const async = true;
 
   request.open(method, urlGetData, async);
@@ -177,15 +147,15 @@ function callUpdateContent(desiredPage){
 
   request.onreadystatechange = function Process() {
     if (this.readyState === 4 && this.status === 200) {      
-      mainContent.innerHTML = this.responseText;
+      
+      
       const data = JSON.parse(this.responseText);
       totalResult = data.total_results;
-      // mainContent.innerHTML = data.results.length;
+      
       
       totalPage = data.total_pages;
-      // for (let i = 0; i < totalPage; i += 1) {
+      
       moviePage[page] = data;
-      // }
       
       UpdateContent(page);
     }
@@ -193,56 +163,6 @@ function callUpdateContent(desiredPage){
 }
 
 
-  // if (query !== null) {
-  //   mainContent.innerHTML = "haha";
-  //   const request = new XMLHttpRequest();
-  //   const method = 'GET';    
-  //   const api_key = '2dc9c50e0d06264a13a9e6953b693bba';    
-  //   let allData = [];
-  //   let page = 1;    
-  //   const async = true;
-    
-    
-
-  //   urlGetData = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${query}&page=${page}`;
-  //   request.open(method, urlGetData, async);
-  //   request.send();
-  //   mainContent.innerHTML = "7";
-  
-  //   mainContent.innerHTML = "haha2";
-  //   request.onreadystatechange = function Process() {
-  //     mainContent.innerHTML = "8";
-  //     if (this.readyState === 4 && this.status === 200) {      
-  //       // mainContent.innerHTML = "haha3";
-  //       data = JSON.parse(this.responseText);
-  //       totalPage = data.total_pages;     
-  
-  //       for(page ; page <= totalPage ; page += 1){
-  //         mainContent.innerHTML = "haha4";
-  //         urlGetData = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${query}&page=${page}`;
-  //         request.open(method, urlGetData, async);
-  //         request.send();
-        
-  //         request.onreadystatechange = function Process() {
-  //           // mainContent.innerHTML = "haha5";
-  //           if (this.readyState === 4 && this.status === 200) {    
-  //             mainContent.innerHTML = "haha5";  
-  //             allData.push(JSON.parse(this.responseText));
-  //             mainContent.innerHTML = allData[1].results[0].popularity;  
-  //             // mainContent.innerHTML = data.results[20].popularity;        
-  //           }
-  //         };        
-  //       }
-  //     }
-  //   };
-
-  //   mainContent.innerHTML = allData;
-  //   // for (let i = 0; i < totalPage; i += 1) {
-  //   //   moviePage[i] = data.slice(i * contentLimit, (i + 1) * contentLimit);
-  //   // }
-    
-  //   // UpdateContent(firstPage);
-  // } 
 if (query !== null) {
     callUpdateContent(firstPage);
   }
