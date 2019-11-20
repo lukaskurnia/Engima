@@ -97,10 +97,10 @@
     <div id="confirmationModal" class="modal">
         <div class="modal__wrapper">
             <h2 class="blue-text">
-                Payment Success!
+                Transaction no. xx
             </h2>
             <div class="modal__message">
-                Thank you for purchasing! You can view your purchase now.
+                Please Transfer to this Virtual Account : xxxxxxxxx
             </div>
             <a href="transaction.php" class="modal__button blue-background">Go to transaction history</a>
         </div>

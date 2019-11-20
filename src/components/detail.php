@@ -55,7 +55,7 @@
 
         $sql_query = "SELECT * FROM schedule WHERE 
                     schedule.movie_id=? AND schedule.datetime>=CURDATE()";
-        $db->execute($sql_query, array("i"), array($movie_id));
+        $schedules = $db->execute($sql_query, array("i"), array($movie_id));
         
         $sql_query = "SELECT userID,rating,review, movID 
                     FROM rating JOIN 
@@ -81,6 +81,7 @@
             $rating = "<b>{$rating}</b> / 10";
         }
 
+        $genre = "";
         foreach ($movie_data['genres'] as $movie) {
             $genre = $genre . "{$movie['name']}, ";
         }
