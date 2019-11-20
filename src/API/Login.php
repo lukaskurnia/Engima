@@ -10,11 +10,13 @@
  * @link     https://gitlab.informatika.org/if3110-2019-01-k03-03/tugas-besar-1-2019
  */
 
-require_once '../components/includes/helper.php';
+use engima\Database;
+
 require_once '../db/database.php';
+require_once '../components/includes/helper.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $db = new Database("127.0.0.1", "root", "", "enigma");
+    $db = new engima\Database("127.0.0.1", "root", "", "enigma");
     $email = $_POST['email'];
     $password = $_POST['password'];
     $sql_query = "SELECT id,username FROM user_profile WHERE email=? and password=?";

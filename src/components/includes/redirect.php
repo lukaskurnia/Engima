@@ -9,6 +9,8 @@
  * @license  no license
  * @link     https://gitlab.informatika.org/if3110-2019-01-k03-03/tugas-besar-1-2019
  */
+
+require_once '../db/database.php';
 require_once "helper.php";
 
 $user_id = lookUpId();

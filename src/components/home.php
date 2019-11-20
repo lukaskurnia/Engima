@@ -24,9 +24,11 @@
 
 <body>
     <?php
+        use engima\Database;
+        
         require_once "includes/redirect.php";
-        require_once "includes/helper.php";
         require_once "../db/database.php";
+        require_once "includes/helper.php";
         require_once "navbar.php";
     ?>
 
@@ -34,7 +36,7 @@
         <?php
         $user_id = lookUpId();
         $username = getUsername($user_id);
-        $db = new Database("127.0.0.1", "root", "", "enigma");
+        $db = new engima\Database("127.0.0.1", "root", "", "enigma");
         $sql_query = "SELECT * FROM movies 
                     LEFT JOIN 
                         (SELECT  movID, AVG(rating) AS rating_avg 
