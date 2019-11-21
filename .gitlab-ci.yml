@@ -1,6 +1,6 @@
 before_script:
   - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-  - npm install
+  
 
 stages:
   - lint
@@ -9,7 +9,15 @@ js_lint:
   image: node:latest
   stage: lint
   script:
+    - npm install
     - npm run lint
+
+php_lint:
+  image: php:latest
+  stage: lint
+  script:
+    - bash installPHP.sh
+    - php composer.phar run lint
 
 # deployToAWS:
 #   only:
