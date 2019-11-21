@@ -15,7 +15,7 @@
 
  use engima\Database;
 
-// require_once '../db/database.php';
+require_once '../db/database.php';
 
 // Method to generate random access token based on user id
 
