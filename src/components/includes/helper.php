@@ -13,9 +13,9 @@
  * @link     https://gitlab.informatika.org/if3110-2019-01-k03-03/tugas-besar-1-2019
  */
 
- use engima\Database;
-
 require_once '../db/database.php';
+
+use engima\Database;
 
 // Method to generate random access token based on user id
 

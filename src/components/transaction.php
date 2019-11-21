@@ -78,7 +78,7 @@
                                 echo "<span class='tp-status green-background'> Success";
                 } elseif ($status == "Cancelled") {
                                 echo "<span class='tp-status red-background'> Cancelled";
-                }                                                          
+                }
                             echo "</h1>
                             <h2>{$movie_data['title']}</h2>
                             <h3><span class='tp-schedule blue-text'>Schedule:</span>{$formatted}</h3>
