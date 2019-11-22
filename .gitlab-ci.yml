@@ -4,6 +4,7 @@ before_script:
 
 stages:
   - lint
+  - deploy
 
 js_lint:
   image: node:latest
@@ -19,10 +20,10 @@ php_lint:
     - bash installPHP.sh
     - php composer.phar run lint
 
-# deployToAWS:
-#   only:
-#     - master
-#     - develop
-#   stage: deploy
-#   script:
-#     - bash deploy.sh
+deployToAWS:
+  only:
+    - master
+    - develop
+  stage: deploy
+  script:
+    - bash deploy.sh
