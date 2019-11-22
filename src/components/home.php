@@ -24,9 +24,9 @@
 
 <body>
     <?php
-        require_once "includes/redirect.php";
-        require_once "includes/helper.php";
         require_once "../db/database.php";
+        require_once "includes/helper.php";
+        require_once "includes/redirect.php";
         require_once "navbar.php";
     ?>
 

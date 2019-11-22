@@ -12,8 +12,8 @@
 
 use engima\Database;
 
-require_once '../components/includes/helper.php';
 require_once '../db/database.php';
+require_once '../components/includes/helper.php';
 
 $db = new engima\Database("127.0.0.1", "root", "", "enigma");
 

@@ -1,5 +1,6 @@
 <?php
 
+require_once '../db/database.php';
 require_once '../components/includes/helper.php';
 
 if (isset($_GET["query"]) && isset($_GET["page"])) {
