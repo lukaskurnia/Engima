@@ -30,11 +30,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $params_values = array($schedule_id,$seat_number,$user_id);
     $status = $db->execute($sql_query, $params_type, $params_values);
     
-    echo $status;
+    //Setting data for aws database
+    $query = "SELECT * FROM schedule JOIN orders ON schedule.id = orders.schedule_id WHERE schedule.id=?"; //Buat dapetin movie id
+    $query_res = $db->execute($query, array("i"), array($schedule_id))[0];
+
+    $data = new \stdClass();
+    $virtual_account = '111222'; // From ws-bank ### NEED EDIT ###
+
+    $data->user_id = $user_id;
+    $data->virtual_acc = $virtual_account;
+    $data->movie_id = $query_res["movie_id"]; //
+    $data->mov_schedule = $query_res["datetime"]; //
+    $data->seat_number = $seat_number; //
+
+    $payload = json_encode($data);
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL,"http://18.207.173.183:3000/transactions");
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+        'Content-Length: ' . strlen($payload))
+    );
+
+    $server_output = curl_exec($ch);
+    curl_close ($ch);
+
+    $raw = json_decode($server_output);
+
+    $result = array();
+    $result["status"] = "".$status."";
+    $result["txn_id"] = $raw->values;
+    $result["virtual_acc"] = $virtual_account;
+    $package = json_encode($result);
+
+    echo $package;
+
 } elseif ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $schedule_id = (int)$_GET["schedule_id"];
     
-    $sql_query = "SELECT * FROM schedule WHERE schedule.id=?";
+    $sql_query = "SELECT * FROM schedule WHERE schedule.id=?"; //Buat dapetin movie id
     $schedule_data = $db->execute($sql_query, array("i"), array($schedule_id))[0];
     
     $movie_id = (int)$schedule_data['movie_id'];
@@ -53,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $datetime = strtotime($schedule_data['datetime']);
     $datetime = date('F j, Y - h:i A', $datetime);
     
-    $sql_query = "SELECT seat_number FROM orders WHERE orders.schedule_id=?";
+    $sql_query = "SELECT seat_number FROM orders WHERE orders.schedule_id=?"; //Buat dapetin seatnumbe
     $order_data = $db->execute($sql_query, array("i"), array($schedule_id));
     
     $result = array();
