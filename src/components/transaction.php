@@ -48,7 +48,7 @@
         $transactions = $db->execute($sql_query, array("i"), array($user_id));
 
         $ch = curl_init();
-        $url = "http://18.207.173.183:4000/transactions/" . $user_id;
+        $url = "http://localhost:4000/transactions/" . $user_id; //DUMMY
         curl_setopt($ch,CURLOPT_URL,$url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     
@@ -56,13 +56,11 @@
         curl_close($ch);
         
         $rawdata = json_decode($output);
-
         if (count($rawdata->values) == 0) {
             echo "<h3 class='grey-text'>You haven't made any purchase yet.</h3>";
         } else {
-            //$user_id = 2;
-            // $index = count($rawdata->values) - 1;
-            //init
+            echo "object preparation begin<br>";
+
             foreach($rawdata->values as $data){
                 $data->order_id = -1;
                 $data->review = null;
@@ -79,33 +77,36 @@
                 }
             }
 
-            $curr_date = date('m/d/Y h:i:s a', time());
-            $curr = strtotime(date('m/d/Y h:i:s a', time()));
+            date_default_timezone_set('Asia/Jakarta');
+            $curr_date = date('Y-m-d h:i:s', time());
+            // $curr = strtotime(date('m/d/Y h:i:s a', time()));
+            $curr = strtotime($curr_date);
 
             //Prepare connection
-            $url = "http://18.207.173.183:4000/transactions";
+            $url = "http://localhost:4000/transactions";//DUMMY
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
 
-            foreach ($rawdata->values as $item) {
+            $index = count($rawdata->values) - 1;
+            for($idx=$index; $idx>=0; $idx--) {
                 $api_key = '2dc9c50e0d06264a13a9e6953b693bba';
-                $urlGetData = "https://api.themoviedb.org/3/movie/" . $item->movie_id .
+                $urlGetData = "https://api.themoviedb.org/3/movie/" . $rawdata->values[$idx]->movie_id .
                 "?api_key=" . $api_key;
                 $get_data = callAPI('GET', $urlGetData, false);
                 $movie_data = json_decode($get_data, true);
-
-                $datetime = strtotime($item->mov_schedule); //movie schedule
+                $datetime = strtotime($rawdata->values[$idx]->mov_schedule); //movie schedule
                 $formatted = date('F j, Y - h:i A', $datetime);
 
                 //WS-Transaction
-                $no_transaksi = $item->txn_id;
-                $status = $item->txn_status;
+                $no_transaksi = $rawdata->values[$idx]->txn_id;
+                $status = $rawdata->values[$idx]->txn_status;
 
                 if($status != "COMPLETED"){
-                    $created_time = strtotime($item->created_on);
+                    $created_time = strtotime($rawdata->values[$idx]->created_on);
+                    $temp = date('m/d/Y h:i:s a', $created_time);
                     $diff = abs($curr-$created_time);
-
+                    
                     if($diff<=120){
                         //Koneksi WS-BANK
                         $status = "COMPLETED";
@@ -139,18 +140,18 @@
                         </div>
                     </div>";
                 if (time() > $datetime) {
-                    if ($item->review==null) {
+                    if ($rawdata->values[$idx]->review==null) {
                         echo "<div class='tp-content__detail'>
-                                <a href='review.php?order_id={$item->order_id}'
+                                <a href='review.php?order_id={$rawdata->values[$idx]->order_id}'
                                 class='tp-button blue-background'>
                                     Add Review
                                 </a>
                             </div >";
                     } else {
                         echo "<div class='tp-content__detail'>
-                                <button id={$item->order_id} 
+                                <button id={$rawdata->values[$idx]->order_id} 
                                 class='tp-button red-background'>Delete Review</button>
-                                <a href='review.php?order_id={$item->order_id}'
+                                <a href='review.php?order_id={$rawdata->values[$idx]->order_id}'
                                 class='tp-button green-background'>
                                     Edit Review
                                 </a>

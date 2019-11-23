@@ -34,6 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $query = "SELECT * FROM schedule JOIN orders ON schedule.id = orders.schedule_id WHERE schedule.id=?"; //Buat dapetin movie id
     $query_res = $db->execute($query, array("i"), array($schedule_id))[0];
 
+    date_default_timezone_set('Asia/Jakarta');
+    $curr_date = date('Y-m-d h:i:s', time());
+
     $data = new \stdClass();
     $virtual_account = '111222'; // From ws-bank ### NEED EDIT ###
 
@@ -42,12 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data->movie_id = $query_res["movie_id"]; //
     $data->mov_schedule = $query_res["datetime"]; //
     $data->seat_number = $seat_number; //
+    $data->created_on = "" . (string)$curr_date;
 
     $payload = json_encode($data);
 
     $ch = curl_init();
 
-    curl_setopt($ch, CURLOPT_URL,"http://18.207.173.183:4000/transactions");
+    curl_setopt($ch, CURLOPT_URL,"http://localhost:4000/transactions");//DUMMY
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
