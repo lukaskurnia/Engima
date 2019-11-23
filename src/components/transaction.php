@@ -48,7 +48,7 @@
         $transactions = $db->execute($sql_query, array("i"), array($user_id));
 
         $ch = curl_init();
-        $url = "http://localhost:4000/transactions/" . $user_id; //DUMMY
+        $url = "http://18.207.173.183:4000/transactions/" . $user_id; //DUMMY
         curl_setopt($ch,CURLOPT_URL,$url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     
@@ -83,7 +83,7 @@
             $curr = strtotime($curr_date);
 
             //Prepare connection
-            $url = "http://localhost:4000/transactions";//DUMMY
+            $url = "http://18.207.173.183:4000/transactions";//DUMMY
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
