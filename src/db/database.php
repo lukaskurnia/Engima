@@ -43,9 +43,9 @@ class Database
     {
         $this->server = $server;
         $this->user = $user;
-        $this->password = $password;
+        $this->password = "password";
         $this->dbName = $dbName;
-        $this->conn  =  mysqli_connect($server, $user, $password, $dbName);
+        $this->conn  =  mysqli_connect($server, $user, $this->password, $dbName);
     }
 
     /**
