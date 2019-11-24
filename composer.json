@@ -1,0 +1,8 @@
+{
+    "scripts":{
+        "lint": "phpcs --standard=psr2 --extensions=php src/"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.4"
+    }
+}

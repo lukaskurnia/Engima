@@ -31,8 +31,10 @@ function GetSeats() {
 
   request.onreadystatechange = function ProcessMovie() {
     if (this.readyState === 4 && this.status === 200) {
+      // document.getElementById('movieTitle').innerHTML = this.responseText;
+      // document.getElementById ('movieTitle').innerHTML = "Hai";
       data = JSON.parse(this.responseText);
-      document.getElementById('movieTitle').innerHTML = data.movie.movie_name;
+      document.getElementById('movieTitle').innerHTML = data.movie;
       document.getElementById('scheduleTime').innerHTML = data.datetime;
       dataHasLoaded = true;
       data.seats.forEach((seat) => {
@@ -54,13 +56,16 @@ function ShowConfirmation() {
   request.send(`user_id=${userId}&schedule_id=${scheduleId}&seat_number=${selectedSeat}`);
   request.onreadystatechange = function ProcessConfirmation() {
     if (this.readyState === 4 && this.status === 200) {
-      if (this.responseText !== '200') {
+      data = JSON.parse(this.responseText);
+      if (data.status !== '200') {
         modalTitle.innerHTML = 'Transaction Failed';
         modalDesc.innerHTML = 'Your transaction could not be processed. Please try again.';
       }
       modal.style.display = 'flex';
       modal.style.zIndex = 5;
       background.style.opacity = 0.5;
+      document.getElementById('txn_number').innerHTML = "Transaction no. " + data.txn_id;
+      document.getElementById('virtual_acc').innerHTML = "Please Transfer to this Virtual Account : " + data.virtual_acc;
     }
   };
 }
@@ -71,12 +76,12 @@ function SelectSeat() {
       const confirmationContent = document.getElementById('confirmationContent');
       confirmationContent.innerHTML = `
                 <div class="bp-confirmation__movie">
-                    <h3 class="bp-confirmation__movie--black">${data.movie.movie_name}</h3>
+                    <h3 class="bp-confirmation__movie--black">${data.movie}</h3>
                     <h4 class="bp-confirmation__movie--light">${data.datetime}</h4>
                 </div>
                 <div class="bp-confirmation__price">
                     <h3 id="seat-number">Seat #${this.innerHTML}</h3>
-                    <h3>${formatPrice(data.movie.price)}</h3>
+                    <h3>${formatPrice(40000)}</h3>
                 </div>
                 <div class="bp-confirmation__button-area">
                     <button id="confirmationButton" class="bp-confirmation__button"><b>Buy Ticket</b></button>
@@ -115,4 +120,4 @@ for (let i = 1; i <= 30; i += 1) {
 }
 
 GetSeats();
-setInterval(GetSeats, 1000);
+// setInterval(GetSeats, 2000);

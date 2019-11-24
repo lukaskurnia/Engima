@@ -4,32 +4,12 @@
 
 Setelah aplikasi web Engima diluncurkan, bioskop Engi menjadi sangat laku. Sebelumnya, Engi mengurus semua transaksi tiket film dan penambahan data film secara manual. Karena kewalahan, akhirnya Engi pergi ke seorang konsultan IT untuk menemukan solusi dari permasalahannya. Konsultan menyarankan Engi untuk menggunakan web service untuk mempermudah pekerjaannya. Melihat aplikasi web yang Anda kerjakan memuaskan, Engi meminta Anda untuk mengimplementasikan perubahan tersebut beserta web service dan aplikasi Bank yang digunakan untuk transaksi tiket film di Engima.
 
-## 2. Requirements and Installation
-In order to run this web on your local server, you need to run it on **PHP 7.1** and install:
 
-1. PHP 7.1
-```
-apt-get install php7.1
-```
-2. PDO Extension
-```
-apt-get install php7.1-pdo-mysql
-```
-3. MySql
-```
-apt-get install mysql
-apt-get install mysql-server
-```
-4. XAMPP (alternative way from mysql)
-Install XAMPP application at https://www.apachefriends.org/download.html
+## 2. Basis Data
 
-## 3. How to run server
+Database mysql dan konten tabel tidak berubah dengan tabel-tabel yang ada adalah movies, orders, rating, schedule, server_session, user_profile. namun tabel movies tidak digunakan.
 
-1. Place the source code in  ..\xampp\htdocs directory
-2. Run XAMPP
-3. Try to open Engima in your browser in URL localhost
-
-## 4. Aplication MockUp
+## 3. Aplication MockUp
 ### Login Page
 
 ![](mockup/Login.jpg)
@@ -67,7 +47,7 @@ Install XAMPP application at https://www.apachefriends.org/download.html
 ![](mockup/Reviews-Add.jpg)
 
 
-## 5. Pembagian Tugas
+## 4. Pembagian Tugas
 Setiap anggota kelompok diwajibkan untuk mengerjakan bagian REST, SOAP, dan ReactJS. Jika Anda akan mengerjakan bonus, dicantumkan juga pembagian kerjanya.
 
 Berikut adalah pembagian tugas sementara dari kelompok kami: 
@@ -103,6 +83,17 @@ Berikut adalah pembagian tugas sementara dari kelompok kami:
 4. Perubahan Film Details   : 13516125
 5. Perubahan Buy Ticket : 13516125
 6. Perubahan Transaction History  : 13516125
+
+## 5. Pembagian Tugas DPPL
+
+1. CI/CD: 13517006
+2. Eksplorasi dan setup mesin deployment: 13517006, 13517084
+3. Unit testing: -
+
+## 6. URL deployment aplikasi
+
+Berikut ini URL deployment aplikasi untuk engima:
+http://107.21.9.12/engima/src/components/login.ph
 
 ## About
 

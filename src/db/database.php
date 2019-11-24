@@ -1,4 +1,7 @@
-<?php
+<?php namespace engima;
+
+// namespace engima;
+
 /**
  * Implement of database connection
  * Php version 7.2.19
@@ -40,9 +43,9 @@ class Database
     {
         $this->server = $server;
         $this->user = $user;
-        $this->password = $password;
+        $this->password = "";
         $this->dbName = $dbName;
-        $this->conn  =  mysqli_connect($server, $user, $password, $dbName);
+        $this->conn  =  mysqli_connect($server, $user, $this->password, $dbName);
     }
 
     /**

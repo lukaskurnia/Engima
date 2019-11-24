@@ -24,6 +24,8 @@
 
 <body>
     <?php
+        use engima\Database;
+        
         require_once "includes/redirect.php";
         require_once "navbar.php";
     ?>
@@ -33,17 +35,27 @@
         <?php
         
         require_once "../db/database.php";
-
-        $movie_id = (int)$_GET["movie_id"];
-        $db = new Database("127.0.0.1", "root", "", "enigma");
-        $sql_query = "SELECT * FROM movies WHERE movies.id=?";
-        $movie_data=$db->execute($sql_query, array("i"), array($movie_id))[0];
-        $release_date = strtotime($movie_data['released_date']);
-        $release_date = date('F j, Y', $release_date);
         
+        $movie_id = (int)$_GET["movie_id"];
+
+        $api_key = '2dc9c50e0d06264a13a9e6953b693bba';
+        $urlGetData = "https://api.themoviedb.org/3/movie/" . $movie_id .
+        "?api_key=" . $api_key;
+        $get_data = callAPI('GET', $urlGetData, false);
+        $movie_data = json_decode($get_data, true);
+
+
+        // $movie_id = (int)$_GET["movie_id"];
+        $db = new engima\Database("127.0.0.1", "root", "", "enigma");
+        // $sql_query = "SELECT * FROM movies WHERE movies.id=?";
+        // $movie_data=$db->execute($sql_query, array("i"), array($movie_id))[0];
+        // $release_date = strtotime($movie_data['released_date']);
+        // $release_date = date('F j, Y', $release_date);
+        
+
         $sql_query = "SELECT * FROM schedule WHERE 
                     schedule.movie_id=? AND schedule.datetime>=CURDATE()";
-        $schedules=$db->execute($sql_query, array("i"), array($movie_id));
+        $schedules = $db->execute($sql_query, array("i"), array($movie_id));
         
         $sql_query = "SELECT userID,rating,review, movID 
                     FROM rating JOIN 
@@ -55,6 +67,7 @@
                         AS ord ON (rating.orders_id=ord.ordID) WHERE movID=?";
         $reviews=$db->execute($sql_query, array("i"), array($movie_id));
         
+
         $rating=0;
         foreach ($reviews as $review) {
             $rating+=$review['rating'];
@@ -68,20 +81,28 @@
             $rating = "<b>{$rating}</b> / 10";
         }
 
+        $genre = "";
+        foreach ($movie_data['genres'] as $movie) {
+            $genre = $genre . "{$movie['name']}, ";
+        }
+
+
+
         echo "<section class='movie'>
             <div class='dp-movie__summary'>
                 <div class='dp-movie__poster'>
                     <img class='poster--big' 
-                    src={$movie_data['movie_pictures']} 
+                    src=https://image.tmdb.org/t/p/w500{$movie_data['poster_path']} 
                     alt='Movie poster'>
                 </div>
                 <div class='dp-movie__text'>
-                    <h2 class='dp-movie__title'>{$movie_data['movie_name']}</h2>
-                    <div class='dp-movie__subtext blue-text'>
-                        {$movie_data['genres']} | {$movie_data['duration']} mins
+                    <h2 class='dp-movie__title'>{$movie_data['title']}</h2>
+                    <div class='dp-movie__subtext blue-text'>";
+                    echo substr($genre, 0, -2);
+                    echo " | {$movie_data['runtime']} mins
                     </div>
                     <div class='dp-movie__subtext grey-text'>
-                        Released date: {$release_date}
+                        Released date: {$movie_data['release_date']}
                     </div>
                     <div class='rating'>
                         <img class='big-icon' src='../icons/star.png' alt='star'>
@@ -89,9 +110,15 @@
                             {$rating}
                         </span>
                     </div>
+                    <div class='rating'>
+                        <img class='big-icon' src='../icons/mdbicon.png' alt='mdbicon'>
+                        <span class='dp-rating'>
+                            MovieDB Rating: {$movie_data['vote_average']}
+                        </span>
+                    </div>
                     <p class='dp-movie__subtext 
                     dp-movie__subtext--light'>
-                        {$movie_data['description']}
+                        {$movie_data['overview']}
                     </p>
                 </div>
             </div>

@@ -24,9 +24,9 @@
 
 <body>
     <?php
-        require_once "includes/redirect.php";
-        require_once "includes/helper.php";
         require_once "../db/database.php";
+        require_once "includes/helper.php";
+        require_once "includes/redirect.php";
         require_once "navbar.php";
 
         $user_id = lookUpId();
@@ -45,7 +45,6 @@
 
             </div>
         </section>
-
         <div class="bp-grid-container">
             <section class="bp-seats">
                 <div class="bp-seats__button-area">
@@ -94,18 +93,17 @@
         </div>
     </div>
 
-    <div id="confirmationModal" class="modal">
-        <div class="modal__wrapper">
-            <h2 class="blue-text">
-                Payment Success!
+    <?php
+    echo "<div id='confirmationModal' class='modal'>
+        <div class='modal__wrapper'>
+            <h2 id='txn_number' class='blue-text'>
             </h2>
-            <div class="modal__message">
-                Thank you for purchasing! You can view your purchase now.
+            <div id='virtual_acc' class='modal__message'>
             </div>
-            <a href="transaction.php" class="modal__button blue-background">Go to transaction history</a>
+            <a href='transaction.php' class='modal__button blue-background'>Go to transaction history</a>
         </div>
-    </div>
-
+    </div>"
+    ?>
 
     <script type="text/javascript" src="includes/js/buy.js"></script>
 </body>

@@ -10,9 +10,12 @@
  * @link     https://gitlab.informatika.org/if3110-2019-01-k03-03/tugas-besar-1-2019
  */
 
-require_once '../db/database.php';
+use engima\Database;
 
-$db = new Database("127.0.0.1", "root", "", "enigma");
+require_once '../db/database.php';
+require_once '../components/includes/helper.php';
+
+$db = new engima\Database("127.0.0.1", "root", "", "enigma");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $order_id = $_POST['order_id'];
@@ -56,11 +59,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo $status;
 } elseif ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $order_id = $_GET['order_id'];
-    $sql_query = "SELECT rating,review,movie_name FROM (((
+    $sql_query = "SELECT rating,review,movie_id FROM ((
                     orders as ord LEFT JOIN rating ON (ord.id=rating.orders_id))
-                    JOIN schedule ON (schedule.id=ord.schedule_id))
-                    JOIN movies ON movies.id = schedule.movie_id)
+                    JOIN schedule ON (schedule.id=ord.schedule_id))                    
                 WHERE ord.id=?";
     $reviews = $db->execute($sql_query, array("i"), array($order_id))[0];
+
+    $api_key = '2dc9c50e0d06264a13a9e6953b693bba';
+    $urlGetData = "https://api.themoviedb.org/3/movie/" . $reviews['movie_id'] .
+    "?api_key=" . $api_key;
+    $get_data = callAPI('GET', $urlGetData, false);
+    $movie_data = json_decode($get_data, true);
+
+    $reviews["movie"] = $movie_data['title'];
     echo json_encode($reviews);
 }

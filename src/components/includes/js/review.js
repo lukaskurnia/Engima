@@ -31,7 +31,7 @@ request.send();
 request.onreadystatechange = function GetReview() {
   if (this.readyState === 4 && this.status === 200) {
     const data = JSON.parse(this.responseText);
-    movieTitle.innerHTML = data.movie_name;
+    movieTitle.innerHTML = data.movie;
     if (data.review !== null) {
       reviewInput.value = data.review;
       document.getElementById(`star${data.rating}`).click();
@@ -67,7 +67,7 @@ function SubmitReview() {
   request.onreadystatechange = function PostReview() {
     if (this.readyState === 4 && this.status === 200) {
       if (this.responseText !== '200') {
-        modalTitle.innerHTML = 'Fail to Sumbit Review';
+        modalTitle.innerHTML = 'Fail to Submit Review';
         modalDesc.innerHTML = 'Your review could not be submitted. Please try again.';
       } else if (hasReviewed) {
         modalTitle.innerHTML = 'Review Updated';
