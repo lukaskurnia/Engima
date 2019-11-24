@@ -45,7 +45,6 @@
 
             </div>
         </section>
-        <?php echo "123" ?>
         <div class="bp-grid-container">
             <section class="bp-seats">
                 <div class="bp-seats__button-area">

@@ -38,9 +38,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     date_default_timezone_set('Asia/Jakarta');
     $curr_date = date('Y-m-d h:i:s', time());
 
-    $data = new \stdClass();
-    $virtual_account = '111222'; // From ws-bank ### NEED EDIT ###
+    //WS-Bank connection
+    $getVirtualAcc = '<?xml version="1.0" encoding="UTF-8"?> <Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+        <Body>
+            <GetVirtualAcc xmlns="http://services/"/>
+        </Body>
+    </Envelope>';
+    
+    $function = $getVirtualAcc;
 
+    $feature_route = "GetVirtualAcc";
+    $url = "http://localhost:8080/ws-bank-1.0-SNAPSHOT/services/" . $feature_route;
+
+    $crl = curl_init();
+    curl_setopt($crl, CURLOPT_URL, $url);
+    curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($crl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    curl_setopt($crl, CURLOPT_POST, true);
+    curl_setopt($crl, CURLOPT_POSTFIELDS, $function);
+    curl_setopt($crl, CURLOPT_HTTPHEADER, array("Content-Type: text/xml; charset=utf-8", "Content-Length: " . strlen($function)));
+    $output = curl_exec($crl);
+    curl_close($crl);
+
+    $out = <<<EOF
+    $output
+    EOF;
+
+    $parser = simplexml_load_string($out);  
+    $parserEnv = $parser->children('S',true);
+    $returns = $parserEnv->Body->children('ns2',true)
+        ->GetVirtualAccResponse->children();
+
+    foreach($returns as $return){
+        $status = (string) $return->status;
+        $virtualAcc = (string) $return->virtualAcc;
+        $nasabahId = (string) $return->name;
+    }
+
+    $virtual_account = $virtualAcc; // From ws-bank ### NEED EDIT ###
+
+
+    $data = new \stdClass();
     $data->user_id = $user_id;
     $data->virtual_acc = $virtual_account;
     $data->movie_id = $query_res["movie_id"];
