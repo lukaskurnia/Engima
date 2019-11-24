@@ -49,8 +49,8 @@
 
         $ch = curl_init();
         $url = "http://107.21.9.12:4000/transactions/" . $user_id; //WS-Transaction URL
-        curl_setopt($ch,CURLOPT_URL,$url);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     
         $output=curl_exec($ch);
         curl_close($ch);
@@ -61,16 +61,16 @@
         } else {
             echo "object preparation begin<br>";
 
-            foreach($rawdata->values as $data){
+            foreach ($rawdata->values as $data) {
                 $data->order_id = -1;
                 $data->review = null;
             }
 
-            foreach($transactions as $transaction){
-                foreach($rawdata->values as $data){
+            foreach ($transactions as $transaction) {
+                foreach ($rawdata->values as $data) {
                     $mov = $data->movie_id;
                     $seat = $data->seat_number;
-                    if($mov == $transaction['movie_id'] AND $seat = $transaction['seat_number']){
+                    if ($mov == $transaction['movie_id'] and $seat = $transaction['seat_number']) {
                         $data->order_id = $transaction['order_id'];
                         $data->review = $transaction['review'];
                     }
@@ -89,7 +89,7 @@
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
 
             $index = count($rawdata->values) - 1;
-            for($idx=$index; $idx>=0; $idx--) {
+            for ($idx=$index; $idx>=0; $idx--) {
                 $api_key = '2dc9c50e0d06264a13a9e6953b693bba';
                 $urlGetData = "https://api.themoviedb.org/3/movie/" . $rawdata->values[$idx]->movie_id .
                 "?api_key=" . $api_key;
@@ -102,20 +102,20 @@
                 $no_transaksi = $rawdata->values[$idx]->txn_id;
                 $status = $rawdata->values[$idx]->txn_status;
 
-                if($status != "COMPLETED"){
+                if ($status != "COMPLETED") {
                     $created_time = strtotime($rawdata->values[$idx]->created_on);
                     $temp = date('m/d/Y h:i:s a', $created_time);
                     $diff = abs($curr-$created_time);
                     
-                    if($diff<=120){
+                    if ($diff<=120) {
                         //Koneksi WS-BANK
                         $status = "COMPLETED";
-                    } else{
+                    } else {
                         $status = "CANCELLED";
                     }
                     
                     $data = array("txn_id"=>$no_transaksi,"txn_status" => $status);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($data));
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
                     $response = curl_exec($ch);
                 }
 

@@ -31,7 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $status = $db->execute($sql_query, $params_type, $params_values);
     
     //Setting data for aws database
-    $query = "SELECT * FROM schedule JOIN orders ON schedule.id = orders.schedule_id WHERE schedule.id=?"; //Buat dapetin movie id
+    $query = "SELECT * FROM schedule JOIN orders ON schedule.id = orders.schedule_id 
+    WHERE schedule.id=?"; //Buat dapetin movie id
     $query_res = $db->execute($query, array("i"), array($schedule_id))[0];
 
     date_default_timezone_set('Asia/Jakarta');
@@ -51,18 +52,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $ch = curl_init();
 
-    curl_setopt($ch, CURLOPT_URL,"http://107.21.9.12:4000/transactions");//WS-Transaction URL
+    curl_setopt($ch, CURLOPT_URL, "http://107.21.9.12:4000/transactions");//WS-Transaction URL
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
 
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Content-Type: application/json',
-        'Content-Length: ' . strlen($payload))
-    );
+        'Content-Length: ' . strlen($payload)));
 
     $server_output = curl_exec($ch);
-    curl_close ($ch);
+    curl_close($ch);
 
     $raw = json_decode($server_output);
 
@@ -73,7 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $package = json_encode($result);
 
     echo $package;
-
 } elseif ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $schedule_id = (int)$_GET["schedule_id"];
     
