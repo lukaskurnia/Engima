@@ -65,10 +65,10 @@
         } else {
             
             // Create array to combine data from ws-transaction and db query
-            foreach ($rawdata->values as $data) {
+        foreach ($rawdata->values as $data) {
                 $data->order_id = -1;
                 $data->review = null;
-            }
+        }
 
             foreach ($transactions as $transaction) {
                 foreach ($rawdata->values as $data) {

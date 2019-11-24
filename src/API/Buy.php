@@ -39,7 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $curr_date = date('Y-m-d h:i:s', time());
 
     //WS-Bank connection
-    $getVirtualAcc = '<?xml version="1.0" encoding="UTF-8"?> <Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    $getVirtualAcc = '<?xml version="1.0" encoding="UTF-8"?> 
+    <Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
         <Body>
             <GetVirtualAcc xmlns="http://services/"/>
         </Body>
@@ -56,7 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     curl_setopt($crl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
     curl_setopt($crl, CURLOPT_POST, true);
     curl_setopt($crl, CURLOPT_POSTFIELDS, $function);
-    curl_setopt($crl, CURLOPT_HTTPHEADER, array("Content-Type: text/xml; charset=utf-8", "Content-Length: " . strlen($function)));
+    curl_setopt($crl, CURLOPT_HTTPHEADER, array("Content-Type: text/xml; charset=utf-8",
+     "Content-Length: " . strlen($function)));
     $output = curl_exec($crl);
     curl_close($crl);
 
@@ -111,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $package = json_encode($result);
 
     echo $package;
-} elseif ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    } elseif ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $schedule_id = (int)$_GET["schedule_id"];
     
     $sql_query = "SELECT * FROM schedule WHERE schedule.id=?"; //Buat dapetin movie id
@@ -142,4 +144,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result["seats"] = $order_data;
     
     echo json_encode($result);
-}
+    }

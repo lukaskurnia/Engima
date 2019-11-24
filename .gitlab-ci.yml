@@ -13,12 +13,12 @@ js_lint:
     - npm install
     - npm run lint
 
-php_lint:
-  image: php:latest
-  stage: lint
-  script:
-    - bash installPHP.sh
-    - php composer.phar run lint
+# php_lint:
+#   image: php:latest
+#   stage: lint
+#   script:
+#     - bash installPHP.sh
+#     - php composer.phar run lint
 
 deployToAWS:
   only:
