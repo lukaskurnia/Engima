@@ -109,19 +109,3 @@ function callAPI($method, $url, $data)
     curl_close($curl);
     return $result;
 }
-
-function putRequest($status, $id){
-    $url = "http://18.207.173.183:4000/transactions";
-    $data = array("txn_id"=>$id,"txn_status" => $status);
-
-    $ch = curl_init($url);
-
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-    curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($data));
-
-    $response = curl_exec($ch);
-    curl_close($curl);
-    
-    return $response;
-}
