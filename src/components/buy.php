@@ -45,7 +45,7 @@
 
             </div>
         </section>
-
+        <?php echo "123" ?>
         <div class="bp-grid-container">
             <section class="bp-seats">
                 <div class="bp-seats__button-area">
@@ -95,15 +95,11 @@
     </div>
 
     <?php
-    $no_transaksi = 1;
-    $virtual_acc = 1234567890;
     echo "<div id='confirmationModal' class='modal'>
         <div class='modal__wrapper'>
-            <h2 class='blue-text'>
-                Transaction no. {$no_transaksi}
+            <h2 id='txn_number' class='blue-text'>
             </h2>
-            <div class='modal__message'>
-                Please Transfer to this Virtual Account : {$virtual_acc}
+            <div id='virtual_acc' class='modal__message'>
             </div>
             <a href='transaction.php' class='modal__button blue-background'>Go to transaction history</a>
         </div>

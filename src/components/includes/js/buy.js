@@ -56,13 +56,16 @@ function ShowConfirmation() {
   request.send(`user_id=${userId}&schedule_id=${scheduleId}&seat_number=${selectedSeat}`);
   request.onreadystatechange = function ProcessConfirmation() {
     if (this.readyState === 4 && this.status === 200) {
-      if (this.responseText !== '200') {
+      data = JSON.parse(this.responseText);
+      if (data.status !== '200') {
         modalTitle.innerHTML = 'Transaction Failed';
         modalDesc.innerHTML = 'Your transaction could not be processed. Please try again.';
       }
       modal.style.display = 'flex';
       modal.style.zIndex = 5;
       background.style.opacity = 0.5;
+      document.getElementById('txn_number').innerHTML = "Transaction no. " + data.txn_id;
+      document.getElementById('virtual_acc').innerHTML = "Please Transfer to this Virtual Account : " + data.virtual_acc;
     }
   };
 }
