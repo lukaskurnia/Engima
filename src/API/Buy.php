@@ -42,16 +42,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $data->user_id = $user_id;
     $data->virtual_acc = $virtual_account;
-    $data->movie_id = $query_res["movie_id"]; //
-    $data->mov_schedule = $query_res["datetime"]; //
-    $data->seat_number = $seat_number; //
+    $data->movie_id = $query_res["movie_id"];
+    $data->mov_schedule = $query_res["datetime"];
+    $data->seat_number = $seat_number;
     $data->created_on = "" . (string)$curr_date;
 
     $payload = json_encode($data);
 
     $ch = curl_init();
 
-    curl_setopt($ch, CURLOPT_URL,"http://18.207.173.183:4000/transactions");//DUMMY
+    curl_setopt($ch, CURLOPT_URL,"http://107.21.9.12:4000/transactions");//WS-Transaction URL
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
