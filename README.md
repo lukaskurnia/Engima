@@ -12,39 +12,39 @@ Database mysql dan konten tabel tidak berubah dengan tabel-tabel yang ada adalah
 ## 3. Aplication MockUp
 ### Login Page
 
-![](mockup/Login.jpg)
+![](mockup/Login.JPG)
 
 ### Register Page
 
-![](mockup/Register.jpg)
+![](mockup/Register.JPG)
 
 ### Home Page
 
-![](mockup/Home.jpg)
+![](mockup/Home.JPG)
 
 ### Search Result page
 
-![](mockup/Search.jpg)
+![](mockup/Search.JPG)
 
 ### Film Detail page
 
-![](mockup/MovieDetail.jpg)
+![](mockup/MovieDetail.JPG)
 
 ### Buy Ticket page
 
-![](mockup/BookTicket-Noticketselected.jpg)
+![](mockup/BookTicket-Noticketselected.JPG)
 
-![](mockup/BookTicket-Selectedticket.jpg)
+![](mockup/BookTicket-Selectedticket.JPG)
 
-![](mockup/BookTicket-Success.jpg)
+![](mockup/BookTicket-Success.JPG)
 
 ### Transaction History page
 
-![](mockup/Transactions.jpg)
+![](mockup/Transactions.JPG)
 
 ### User Review page
 
-![](mockup/Reviews-Add.jpg)
+![](mockup/Reviews-Add.JPG)
 
 
 ## 4. Pembagian Tugas
@@ -93,7 +93,7 @@ Berikut adalah pembagian tugas sementara dari kelompok kami:
 ## 6. URL deployment aplikasi
 
 Berikut ini URL deployment aplikasi untuk engima:
-http://107.21.9.12/engima/src/components/login.ph
+http://107.21.9.12/engima/src/components/login.php
 
 ## About
 

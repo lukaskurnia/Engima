@@ -19,6 +19,8 @@ js_lint:
 #   script:
 #     - bash installPHP.sh
 #     - php composer.phar run lint
+# Kebetulan tidak berjalan setelah dilakukan update terakhir
+# pada Buy.php dan transaction.php :)
 
 deployToAWS:
   only:
